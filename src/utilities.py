@@ -1,6 +1,24 @@
 version = "0.5"
 
 
+def is_sorted(iterable:list):
+	"""
+	Checks if a list is sorted.
+
+	# Attributes
+
+	iterable: `list`
+		The object to iterate through.
+	"""
+	sorted = True
+	for i in range(len(iterable)):
+		if i < len(iterable)-1 and iterable[i] > iterable[i+1]:
+			sorted = False; break
+	return sorted
+
+print(is_sorted(["a","b","c"]))
+print(is_sorted(["a","c","b"]))
+
 def bubbleSort(iterable:list):
 	"""
 	Represents a bubble sort.
@@ -10,12 +28,13 @@ def bubbleSort(iterable:list):
 	# Attributes
 
 	iterable: `list`
-		The object to iterable through.
+		The object to iterate through.
 	"""
-	for i in range(len(iterable)):
-		for j in range(len(iterable) - 1):
-			if iterable[j] > iterable[j+1]:
-				iterable[j+1], iterable[j] = iterable[j], iterable[j+1]
+	if not is_sorted(iterable):
+		for i in range(len(iterable)):
+			for j in range(len(iterable) - 1):
+				if iterable[j] > iterable[j+1]:
+					iterable[j+1], iterable[j] = iterable[j], iterable[j+1]
 	return iterable
 
 
@@ -28,15 +47,16 @@ def insertionSort(iterable:list):
 	# Attributes
 
 	iterable: `list`
-		The object to iterable through.
+		The object to iterate through.
 	"""
-	for i in range(1, len(iterable)):
-		key = iterable[i]
-		j = i-1
-		while j >=0 and key < iterable[j] :
-				iterable[j+1] = iterable[j]
-				j -= 1
-		iterable[j+1] = key
+	if not is_sorted(iterable):
+		for i in range(1, len(iterable)):
+			key = iterable[i]
+			j = i-1
+			while j >=0 and key < iterable[j] :
+					iterable[j+1] = iterable[j]
+					j -= 1
+			iterable[j+1] = key
 	return iterable
 
 
@@ -47,7 +67,7 @@ def mergeSort(iterable:list, zero:int, length_minus_one:int):
 	# Attributes
 
 	iterable: `list`
-		The object to iterable through.
+		The object to iterate through.
 
 	zero: `int`
 		Always pass 0 into the merge sort.
@@ -90,7 +110,24 @@ def mergeSort(iterable:list, zero:int, length_minus_one:int):
 			sort(arr, m+1, r)
 			merge(arr, l, m, r)
 		return arr
-	return sort(iterable, zero, length_minus_one)
+	if is_sorted(iterable):
+		return iterable
+	else:
+		return sort(iterable, zero, length_minus_one)
+
+
+def linearSearch(iterable:list, item):
+	found = False
+	for i in iterable:
+		if i == item: found = True; break
+	return found
+
+
+def binarySearch(iterable:list, item):
+	if is_sorted(iterable):
+		pass
+	else:
+		return "Iterable not sorted."
 
 
 def largest(iterable:list):
