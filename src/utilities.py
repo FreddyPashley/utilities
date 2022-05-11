@@ -1,4 +1,5 @@
-version = "0.2"
+version = "0.3"
+
 
 def bubbleSort(iterable:list):
 	"""
