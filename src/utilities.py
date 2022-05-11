@@ -145,3 +145,33 @@ def odds(iterable:list):
 		The list to iterate through.
 	"""
 	return [n for n in iterable if n % 2 != 0]
+
+
+def divisible(iterable:list, divider:int):
+	"""
+	Finds all the numbers in a list that are divisible by the number passed.
+
+	# Attributes
+	
+	iterable: `list`
+		The list to iterate through.
+
+	divider: `int`
+		The number to check if divisible by.
+	"""
+	return [n for n in iterable if n % divider == 0]
+
+
+def not_divisible(iterable:list, divider:int):
+	"""
+	Finds all the numbers in a list that are not divisible by the number passed.
+
+	# Attributes
+	
+	iterable: `list`
+		The list to iterate through.
+
+	divider: `int`
+		The number to check if not divisible by.
+	"""
+	return [n for n in iterable if n % divider != 0]
