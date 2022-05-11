@@ -1,4 +1,4 @@
-version = "0.3"
+version = "0.4"
 
 
 def bubbleSort(iterable:list):
@@ -40,7 +40,7 @@ def insertionSort(iterable:list):
 	return iterable
 
 
-def mergeSort(iterable:list, zero, length_minus_one):
+def mergeSort(iterable:list, zero:int, length_minus_one:int):
 	"""
 	Represents a merge sort.
 
@@ -48,6 +48,12 @@ def mergeSort(iterable:list, zero, length_minus_one):
 
 	iterable: `list`
 		The object to iterable through.
+
+	zero: `int`
+		Always pass 0 into the merge sort.
+
+	length_minus_one: `int`
+		Pass the length of the iterable minus 1 into the merge sort.
 	"""
 	def merge(arr, l, m, r):
 		n1 = m - l + 1
@@ -85,3 +91,57 @@ def mergeSort(iterable:list, zero, length_minus_one):
 			merge(arr, l, m, r)
 		return arr
 	return sort(iterable, zero, length_minus_one)
+
+
+def largest(iterable:list):
+	"""
+	Calculates the largest number in the list.
+
+	# Attributes
+	
+	iterable: `list`
+		The list to iterate through.
+	"""
+	largest = 0
+	for n in iterable:
+		if n > largest: largest = n
+	return largest
+
+
+def smallest(iterable:list):
+	"""
+	Calculates the smallest number in the list.
+
+	# Attributes
+	
+	iterable: `list`
+		The list to iterate through.
+	"""
+	smallest = 0
+	for n in iterable:
+		if n < smallest: smallest = n
+	return smallest
+
+
+def evens(iterable:list):
+	"""
+	Finds all the even numbers in a list.
+
+	# Attributes
+	
+	iterable: `list`
+		The list to iterate through.
+	"""
+	return [n for n in iterable if n % 2 == 0]
+
+
+def odds(iterable:list):
+	"""
+	Finds all the odd numbers in a list.
+
+	# Attributes
+	
+	iterable: `list`
+		The list to iterate through.
+	"""
+	return [n for n in iterable if n % 2 != 0]
