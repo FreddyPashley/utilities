@@ -1,4 +1,4 @@
-version = "0.6"
+version = "0.7"
 DEBUG = False
 GRAPH = False
 from random import randint
@@ -77,7 +77,7 @@ def insertionSort(iterable:list):
 	return iterable
 	
 	
-def mergeSort(iterable:list, zero:int, length_minus_one:int):
+def mergeSort(iterable:list, zero:int, iterable_length_minus_one:int):
 	"""
 	Represents a merge sort.
 	
@@ -89,7 +89,7 @@ def mergeSort(iterable:list, zero:int, length_minus_one:int):
 	zero: `int`
 	Always pass 0 into the merge sort.
 	
-	length_minus_one: `int`
+	iterable_length_minus_one: `int`
 	Pass the length of the iterable minus 1 into the merge sort.
 	"""
 	def merge(arr, l, m, r):
@@ -139,7 +139,6 @@ def mergeSort(iterable:list, zero:int, length_minus_one:int):
 	else:
 		return sort(iterable, zero, length_minus_one)
 
-insertionSort(makeTest(100,0,10))
 	
 def linearSearch(iterable:list, item):
 	"""
@@ -187,6 +186,7 @@ def binarySearch(iterable:list, item):
 		iterable = mergeSort(iterable, 0, len(iterable)-1)
 		if DEBUG: print("Sorted binary list")
 	return binary(iterable, item)
+
 	
 def largest(iterable:list):
 	"""
@@ -270,3 +270,59 @@ def not_divisible(iterable:list, divider:int):
 	The number to check if not divisible by.
 	"""
 	return [n for n in iterable if n % divider != 0]
+
+def list2dict(iterable:list):
+	"""
+	Converts a list to a dictionary.
+
+	The item and value should be passed as [i, v] as items in the list, for example `[[1,2], [3,4]]` where this would be converted to `{1:2, 3:4}`.
+
+	# Attributes
+
+	iterable: `list`
+		The list to convert.
+	"""
+	return {i[0]:i[1] for i in iterable}
+
+def list2tuple(iterable:list):
+	"""
+	Converts a list to a tuple.
+
+	Items inside the list are also converted to tuples if they are a list.
+
+	# Attributes
+
+	iterable: `list`
+		The list to convert.
+	"""
+	if type(iterable) != list: return iterable
+	return tuple(list2tuple(i) for i in iterable)
+
+
+def tuple2list(iterable:tuple):
+	"""
+	Converts a tuple to a list.
+
+	Items inside the tuple are also converted to lists if they are a tuple.
+
+	# Attributes
+
+	iterable: `tuple`
+		The tuple to convert.
+	"""
+	if type(iterable) != tuple: return iterable
+	return list(tuple2list(i) for i in iterable)
+	
+
+def dict2list(dictionary:dict):
+	"""
+	Converts a dictionary to a list.
+
+	The list is sorted based on the dictionary keys/items.
+
+	# Attributes
+
+	dictionary: `dict`
+		The dictionary to convert.
+	"""
+	return [[i,dictionary[i]] for i in [x for x in insertionSort([i[0] for i in list(dictionary.items())])]]
