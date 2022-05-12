@@ -1,8 +1,14 @@
-version = "0.5"
-DEBUG = True
+version = "0.6"
+DEBUG = False
+GRAPH = False
 from random import randint
-	
-	
+if GRAPH: import matplotlib.pyplot as plt
+
+
+if DEBUG:
+	def makeTest(length,low,high):
+		return [randint(low,high) for i in range(length)]
+
 def is_sorted(iterable:list):
 	"""
 	Checks if a list is sorted.
@@ -14,8 +20,8 @@ def is_sorted(iterable:list):
 	"""
 	sorted = True
 	for i in range(len(iterable)):
-		if i < len(iterable)-1 and iterable[i] > iterable[i+1]:
-		  sorted = False; break
+			if i < len(iterable)-1 and iterable[i] > iterable[i+1]:
+			  sorted = False; break
 	return sorted
 	
 	
@@ -34,7 +40,7 @@ def bubbleSort(iterable:list):
 		for j in range(len(iterable) - 1):
 			if iterable[j] > iterable[j+1]:
 				if DEBUG:
-					print("Bubbling")
+					print("Bubbling "+str(j))
 				iterable[j+1], iterable[j] = iterable[j], iterable[j+1]
 	return iterable
 	
@@ -56,10 +62,18 @@ def insertionSort(iterable:list):
 			key = iterable[i]
 			j = i-1
 			while j >=0 and key < iterable[j]:
-				if DEBUG: print("Finding place in sorted half")
+				if DEBUG:
+					print("Finding place in sorted half")
+				if GRAPH:
+					plt.plot(iterable)
+					plt.xlabel("Position in array")
+					plt.ylabel("Value of number in position")
+					plt.draw()
+					plt.pause(0.0001)
+					plt.clf()
 				iterable[j+1] = iterable[j]
 				j -= 1
-			iterable[j+1] = key
+				iterable[j+1] = key
 	return iterable
 	
 	
@@ -112,12 +126,20 @@ def mergeSort(iterable:list, zero:int, length_minus_one:int):
 			sort(arr, l, m)
 			sort(arr, m+1, r)
 			merge(arr, l, m, r)
+			if GRAPH:
+				plt.plot(iterable)
+				plt.xlabel("Position in array")
+				plt.ylabel("Value of number in position")
+				plt.draw()
+				plt.pause(0.0001)
+				plt.clf()
 		return arr
 	if is_sorted(iterable):
 		return iterable
 	else:
 		return sort(iterable, zero, length_minus_one)
-	
+
+insertionSort(makeTest(100,0,10))
 	
 def linearSearch(iterable:list, item):
 	"""
@@ -163,7 +185,7 @@ def binarySearch(iterable:list, item):
 			else: return False
 	if not is_sorted(iterable):
 		iterable = mergeSort(iterable, 0, len(iterable)-1)
-		print("Sorted binary list")
+		if DEBUG: print("Sorted binary list")
 	return binary(iterable, item)
 	
 def largest(iterable:list):
