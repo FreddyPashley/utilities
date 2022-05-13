@@ -9,6 +9,9 @@ For the full list, use `dir(utilities)` in the python shell for a list of featur
 
 To see the full details about how a feature/function works, use `print(funcname.__doc__)` to see a formatted string explaining parameters and behaviour.
 
+## Timing code execution
+All functions within the module accept an optional `timer` parameter, defaulting to `False`. When `False`, the function returns the result normally. When `True`, the function returns a tuple in the format: `(result, time_taken_in_seconds)`. You can also convert this into minutes using the `utilities.secs2mins` function if required.
+
 # Help
 ## How to install
 It is recommended that you run `install.py`, however you can manually install the module by copying `utilities.py` to the `Lib` folder located in your python directory. To check for this directory, run `import os` and then `os` in your python shell.
