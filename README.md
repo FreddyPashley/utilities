@@ -15,5 +15,5 @@ It is recommended that you run `install.py`, however you can manually install th
 
 
 ## Credits
-Freddy Pashley
+Freddy Pashley  
 George Wyburn
